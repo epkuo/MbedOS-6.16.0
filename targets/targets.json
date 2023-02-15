@@ -3320,6 +3320,7 @@
         ],
         "overrides": {
             "network-default-interface-type": "ETHERNET"
+            "clock_source": "USE_PLL_HSE_XTAL",
         },
         "supported_form_factors": [
             "ARDUINO_UNO"
