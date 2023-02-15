@@ -3319,8 +3319,8 @@
             "USBDEVICE"
         ],
         "overrides": {
-            "network-default-interface-type": "ETHERNET"
             "clock_source": "USE_PLL_HSE_XTAL",
+            "network-default-interface-type": "ETHERNET"
         },
         "supported_form_factors": [
             "ARDUINO_UNO"
