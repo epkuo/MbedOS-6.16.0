@@ -51,7 +51,8 @@
         },
         "STM32H7": {
             "eth-txbufnb": 10,
-            "eth-phy-address": (0xF8)
+            "eth-phy-address": 248,
+            "eth-phy-duplex-status": "0x0800"
         },
         "ARCH_MAX": {
             "eth-phy-address": 1
