@@ -51,7 +51,7 @@
         },
         "STM32H7": {
             "eth-txbufnb": 10,
-            "eth-phy-AutoNegotiation": "ETH_AUTONEGOTIATION_DISABLE"
+            "eth-phy-address": (0xF8)
         },
         "ARCH_MAX": {
             "eth-phy-address": 1
