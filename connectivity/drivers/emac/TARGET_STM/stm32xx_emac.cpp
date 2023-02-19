@@ -163,7 +163,7 @@ bool _phy_init()
 
 int32_t _phy_get_state()
 {
-    return LAN8742_GetLinkState(&LAN8742);
+    return 2; // LAN8742_GetLinkState(&LAN8742);
 }
 
 bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *speed)
@@ -738,7 +738,7 @@ void STM32_EMAC::phy_task()
 }
 #else // ETH_IP_VERSION_V2
 {
-    const int32_t status = 2; //_phy_get_state();
+    const int32_t status = _phy_get_state();
     const int32_t old_status = (int32_t)phy_status;
     const bool is_up  = _phy_is_up(status);
     const bool was_up = _phy_is_up(old_status);
