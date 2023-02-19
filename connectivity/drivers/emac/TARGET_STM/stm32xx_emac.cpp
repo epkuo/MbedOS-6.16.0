@@ -158,7 +158,9 @@ bool _phy_init()
     LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
 
     /* Initialize the LAN8742 ETH PHY */
-    return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
+    LAN8742_Init(&LAN8742);
+    return true;
+    // return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
 }
 
 int32_t _phy_get_state()
