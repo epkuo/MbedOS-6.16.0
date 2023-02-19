@@ -197,7 +197,7 @@ bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *sp
 
 bool _phy_is_up(int32_t phy_state)
 {
-    return true //phy_state > LAN8742_STATUS_LINK_DOWN;
+    return true; //phy_state > LAN8742_STATUS_LINK_DOWN;
 }
 
 static void MPU_Config(void)
