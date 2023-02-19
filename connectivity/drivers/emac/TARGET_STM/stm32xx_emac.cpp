@@ -168,7 +168,7 @@ int32_t _phy_get_state()
 
 bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *speed)
 {
-    switch (phy_state) {
+    /* switch (phy_state) {
         case LAN8742_STATUS_100MBITS_FULLDUPLEX:
             *duplex = ETH_FULLDUPLEX_MODE;
             *speed = ETH_SPEED_100M;
@@ -187,14 +187,17 @@ bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *sp
             break;
         default:
             return false;
-    }
+    } */
 
+    *duplex = ETH_FULLDUPLEX_MODE;
+    *speed = ETH_SPEED_100M;
+    
     return true;
 }
 
 bool _phy_is_up(int32_t phy_state)
 {
-    return phy_state > LAN8742_STATUS_LINK_DOWN;
+    return true //phy_state > LAN8742_STATUS_LINK_DOWN;
 }
 
 static void MPU_Config(void)
