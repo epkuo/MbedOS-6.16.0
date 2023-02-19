@@ -718,9 +718,9 @@ void STM32_EMAC::thread_function(void *pvParameters)
 void STM32_EMAC::phy_task()
 #ifndef ETH_IP_VERSION_V2
 {
-    uint32_t status;
+    uint32_t status = 2;
 
-    if (HAL_ETH_ReadPHYRegister(&EthHandle, PHY_BSR, &status) == HAL_OK) {
+    // if (HAL_ETH_ReadPHYRegister(&EthHandle, PHY_BSR, &status) == HAL_OK) {
         if ((emac_link_state_cb) && (status != 0xFFFF)) {
             if ((status & PHY_LINKED_STATUS) && !(phy_status & PHY_LINKED_STATUS)) {
                 tr_info("emac_link_state_cb set to true");
@@ -731,9 +731,9 @@ void STM32_EMAC::phy_task()
             }
         }
         phy_status = status;
-    } else {
-        tr_error("HAL_ETH_ReadPHYRegister issue");
-    }
+    // } else {
+    //     tr_error("HAL_ETH_ReadPHYRegister issue");
+    // }
 
 }
 #else // ETH_IP_VERSION_V2
