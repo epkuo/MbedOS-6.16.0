@@ -9,7 +9,7 @@
         },
         "eth-phy-address": {
             "help" : "Configures actual PHY address according to pullup/down status of PHYAD pin(s)",
-            "value" : 1
+            "value" : 0
         },
         "eth-phy-media-interface": {
             "help" : "Selects Connection to PHY Chip: ETH_MEDIA_INTERFACE_RMII / ETH_MEDIA_INTERFACE_MII",
