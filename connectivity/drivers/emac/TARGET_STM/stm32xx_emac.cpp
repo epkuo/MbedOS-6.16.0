@@ -718,7 +718,7 @@ void STM32_EMAC::thread_function(void *pvParameters)
 void STM32_EMAC::phy_task()
 #ifndef ETH_IP_VERSION_V2
 {
-    uint32_t status = 0;
+    uint32_t status = 0xFFFF;
 
     // if (HAL_ETH_ReadPHYRegister(&EthHandle, PHY_BSR, &status) == HAL_OK) {
         if ((emac_link_state_cb) && (status != 0xFFFF)) {
