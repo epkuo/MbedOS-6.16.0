@@ -738,7 +738,7 @@ void STM32_EMAC::phy_task()
 }
 #else // ETH_IP_VERSION_V2
 {
-    const int32_t status = _phy_get_state();
+    const int32_t status = 2; //_phy_get_state();
     const int32_t old_status = (int32_t)phy_status;
     const bool is_up  = _phy_is_up(status);
     const bool was_up = _phy_is_up(old_status);
