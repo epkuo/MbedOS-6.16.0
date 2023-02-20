@@ -170,7 +170,7 @@ bool _phy_init()
 int32_t _phy_get_state()
 {
     printf("_phy_get_state() = %d\r\n", LAN8742_GetLinkState(&LAN8742));
-    return 2; // LAN8742_GetLinkState(&LAN8742);
+    return LAN8742_GetLinkState(&LAN8742);
 }
 
 bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *speed)
