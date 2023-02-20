@@ -163,8 +163,7 @@ bool _phy_init()
 
     /* Initialize the LAN8742 ETH PHY */
     printf("_phy_init() = %d\r\n", LAN8742_Init(&LAN8742));
-    return true;
-    // return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
+    return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
 }
 
 int32_t _phy_get_state()
