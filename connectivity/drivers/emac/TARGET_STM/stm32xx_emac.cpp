@@ -785,7 +785,7 @@ void STM32_EMAC::phy_task()
 }
 #endif // ETH_IP_VERSION_V2
 
-#if defined (STM32F767xx) || defined (STM32F769xx) || defined (STM32F777xx)\
+#if defined (STM32F767xx) || defined (STM32H743xx) || defined (STM32F769xx) || defined (STM32F777xx)\
     || defined (STM32F779xx)
 /**
  * workaround for the ETH RMII bug in STM32F76x and STM32F77x revA
@@ -901,7 +901,7 @@ bool STM32_EMAC::power_up()
 
     phy_task_handle = mbed::mbed_event_queue()->call_every(PHY_TASK_PERIOD, mbed::callback(this, &STM32_EMAC::phy_task));
 
-#if defined (STM32F767xx) || defined (STM32F769xx) || defined (STM32F777xx)\
+#if defined (STM32F767xx) || defined (STM32H743xx) || defined (STM32F769xx) || defined (STM32F777xx)\
       || defined (STM32F779xx)
     rmii_watchdog_thread = create_new_thread("stm32_rmii_watchdog", &STM32_EMAC::rmii_watchdog_thread_function, this, 128, THREAD_PRIORITY, &rmii_watchdog_thread_cb);
 #endif
