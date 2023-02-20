@@ -124,6 +124,7 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
                    continue with next address */
                 continue;
             }
+            printf("Get the device address from special mode register\r\n");
 
             if ((regvalue & LAN8742_SMR_PHY_ADDR) == addr) {
                 pObj->DevAddr = addr;
