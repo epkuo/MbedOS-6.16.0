@@ -162,13 +162,13 @@ bool _phy_init()
     printf("Set PHY IO Complete\r\n");
 
     /* Initialize the LAN8742 ETH PHY */
-    printf("_phy_init() = %d\r\n", LAN8742_Init(&LAN8742));
+    // printf("_phy_init() = %d\r\n", LAN8742_Init(&LAN8742));
     return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
 }
 
 int32_t _phy_get_state()
 {
-    printf("_phy_get_state() = %d\r\n", LAN8742_GetLinkState(&LAN8742));
+    // printf("_phy_get_state() = %d\r\n", LAN8742_GetLinkState(&LAN8742));
     return LAN8742_GetLinkState(&LAN8742);
 }
 
