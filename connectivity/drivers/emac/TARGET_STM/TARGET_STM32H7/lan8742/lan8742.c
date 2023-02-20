@@ -135,6 +135,7 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
 
         if (pObj->DevAddr > LAN8742_MAX_DEV_ADDR) {
             status = LAN8742_STATUS_ADDRESS_ERROR;
+            printf("LAN8742_STATUS_ADDRESS_ERROR\r\n");
         }
 
         /* if device address is matched */
@@ -148,12 +149,15 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
                     /* wait until software reset is done or timeout occured  */
                     while (regvalue & LAN8742_BCR_SOFT_RESET) {
                         if ((pObj->IO.GetTick() - tickstart) <= LAN8742_SW_RESET_TO) {
+                            printf("LAN8742_SW_RESET_TO\r\n");
                             if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &regvalue) < 0) {
                                 status = LAN8742_STATUS_READ_ERROR;
+                                printf("LAN8742_STATUS_READ_ERROR\r\n");
                                 break;
                             }
                         } else {
                             status = LAN8742_STATUS_RESET_TIMEOUT;
+                            printf("LAN8742_STATUS_RESET_TIMEOUT\r\n");
                         }
                     }
                 } else {
@@ -170,6 +174,7 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
 
         /* Wait for 2s to perform initialization */
         while ((pObj->IO.GetTick() - tickstart) <= LAN8742_INIT_TO) {
+            printf("Wait for 2s\r\n");
         }
         pObj->Is_Initialized = 1;
     }
