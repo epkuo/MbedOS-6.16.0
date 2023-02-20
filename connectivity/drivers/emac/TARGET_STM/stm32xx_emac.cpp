@@ -158,6 +158,8 @@ bool _phy_init()
     
     /* Set PHY IO functions */
     LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
+    
+    printf("Set PHY IO Complete\r\n");
 
     /* Initialize the LAN8742 ETH PHY */
     printf("_phy_init() = %d\r\n", LAN8742_Init(&LAN8742));
