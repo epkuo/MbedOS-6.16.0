@@ -154,6 +154,8 @@ MBED_WEAK void STM_HAL_ETH_Handler(ETH_HandleTypeDef *heth);
 #ifdef ETH_IP_VERSION_V2
 bool _phy_init()
 {
+    printf("enter _phy_init()\r\n");
+    
     /* Set PHY IO functions */
     LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
 
