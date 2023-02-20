@@ -158,47 +158,50 @@ bool _phy_init()
     LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
 
     /* Initialize the LAN8742 ETH PHY */
-    LAN8742_Init(&LAN8742);
+    printf("_phy_init() = %d\r\n", LAN8742_Init(&LAN8742));
     return true;
     // return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
 }
 
 int32_t _phy_get_state()
 {
+    printf("_phy_get_state() = %d\r\n", LAN8742_GetLinkState(&LAN8742));
     return 2; // LAN8742_GetLinkState(&LAN8742);
 }
 
 bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *speed)
 {
-    /* switch (phy_state) {
+    switch (phy_state) {
         case LAN8742_STATUS_100MBITS_FULLDUPLEX:
             *duplex = ETH_FULLDUPLEX_MODE;
             *speed = ETH_SPEED_100M;
+            printf("ETH_FULLDUPLEX_MODE + ETH_SPEED_100M\r\n");
             break;
         case LAN8742_STATUS_100MBITS_HALFDUPLEX:
             *duplex = ETH_HALFDUPLEX_MODE;
             *speed = ETH_SPEED_100M;
+            printf("ETH_HALFDUPLEX_MODE + ETH_SPEED_100M\r\n");
             break;
         case LAN8742_STATUS_10MBITS_FULLDUPLEX:
             *duplex = ETH_FULLDUPLEX_MODE;
             *speed = ETH_SPEED_10M;
+            printf("ETH_FULLDUPLEX_MODE + ETH_SPEED_10M\r\n");
             break;
         case LAN8742_STATUS_10MBITS_HALFDUPLEX:
             *duplex = ETH_HALFDUPLEX_MODE;
             *speed = ETH_SPEED_10M;
+            printf("ETH_HALFDUPLEX_MODE + ETH_SPEED_10M\r\n");
             break;
         default:
             return false;
-    } */
-
-    *duplex = ETH_FULLDUPLEX_MODE;
-    *speed = ETH_SPEED_100M;
+    }
     
     return true;
 }
 
 bool _phy_is_up(int32_t phy_state)
 {
+    printf("_phy_is_up() = %d\r\n", phy_state > LAN8742_STATUS_LINK_DOWN);
     return true; //phy_state > LAN8742_STATUS_LINK_DOWN;
 }
 
