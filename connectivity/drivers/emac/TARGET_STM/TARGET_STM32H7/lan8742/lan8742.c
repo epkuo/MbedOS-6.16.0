@@ -368,11 +368,12 @@ int32_t LAN8742_GetLinkState(lan8742_Object_t *pObj)
   */
 int32_t LAN8742_SetLinkState(lan8742_Object_t *pObj, uint32_t LinkState)
 {
-    uint32_t bcrvalue = 0;
+    // uint32_t bcrvalue = 0;
     int32_t status = LAN8742_STATUS_OK;
 
+    /* SKIP CODE
     if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &bcrvalue) >= 0) {
-        /* Disable link config (Auto nego, speed and duplex) */
+        // Disable link config (Auto nego, speed and duplex)
         bcrvalue &= ~(LAN8742_BCR_AUTONEGO_EN | LAN8742_BCR_SPEED_SELECT | LAN8742_BCR_DUPLEX_MODE);
 
         if (LinkState == LAN8742_STATUS_100MBITS_FULLDUPLEX) {
@@ -382,7 +383,7 @@ int32_t LAN8742_SetLinkState(lan8742_Object_t *pObj, uint32_t LinkState)
         } else if (LinkState == LAN8742_STATUS_10MBITS_FULLDUPLEX) {
             bcrvalue |= LAN8742_BCR_DUPLEX_MODE;
         } else {
-            /* Wrong link status parameter */
+            // Wrong link status parameter
             status = LAN8742_STATUS_ERROR;
         }
     } else {
@@ -390,11 +391,11 @@ int32_t LAN8742_SetLinkState(lan8742_Object_t *pObj, uint32_t LinkState)
     }
 
     if (status == LAN8742_STATUS_OK) {
-        /* Apply configuration */
+        // Apply configuration
         if (pObj->IO.WriteReg(pObj->DevAddr, LAN8742_BCR, bcrvalue) < 0) {
             status = LAN8742_STATUS_WRITE_ERROR;
         }
-    }
+    } */
 
     return status;
 }
