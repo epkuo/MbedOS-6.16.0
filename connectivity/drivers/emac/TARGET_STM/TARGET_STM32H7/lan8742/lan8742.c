@@ -124,7 +124,6 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
                    continue with next address */
                 continue;
             }
-            printf("Get the device address from special mode register\r\n");
 
             if ((regvalue & LAN8742_SMR_PHY_ADDR) == addr) {
                 pObj->DevAddr = addr;
@@ -135,13 +134,12 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
 
         if (pObj->DevAddr > LAN8742_MAX_DEV_ADDR) {
             status = LAN8742_STATUS_ADDRESS_ERROR;
-            printf("LAN8742_STATUS_ADDRESS_ERROR\r\n");
         }
 
         /* if device address is matched */
         if (status == LAN8742_STATUS_OK) {
             /* set a software reset  */
-            /* [SKIP RESET CODE]
+            /* [SKIP CODE]
             if (pObj->IO.WriteReg(pObj->DevAddr, LAN8742_BCR, LAN8742_BCR_SOFT_RESET) >= 0) {
                 // get software reset status
                 if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &regvalue) >= 0) {
@@ -150,15 +148,12 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
                     // wait until software reset is done or timeout occured
                     while (regvalue & LAN8742_BCR_SOFT_RESET) {
                         if ((pObj->IO.GetTick() - tickstart) <= LAN8742_SW_RESET_TO) {
-                            printf("LAN8742_SW_RESET_TO\r\n");
                             if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &regvalue) < 0) {
                                 status = LAN8742_STATUS_READ_ERROR;
-                                printf("LAN8742_STATUS_READ_ERROR\r\n");
                                 break;
                             }
                         } else {
                             status = LAN8742_STATUS_RESET_TIMEOUT;
-                            printf("LAN8742_STATUS_RESET_TIMEOUT\r\n");
                         }
                     }
                 } else {
@@ -176,7 +171,6 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
         /* Wait for 2s to perform initialization */
         /* [SKIP CODE]
         while ((pObj->IO.GetTick() - tickstart) <= LAN8742_INIT_TO) {
-            printf("Wait for 2s\r\n");
         } */
         pObj->Is_Initialized = 1;
     }
@@ -268,16 +262,17 @@ int32_t LAN8742_StartAutoNego(lan8742_Object_t *pObj)
     uint32_t readval = 0;
     int32_t status = LAN8742_STATUS_OK;
 
+    /* [SKIP CODE]
     if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &readval) >= 0) {
         readval |= LAN8742_BCR_AUTONEGO_EN;
 
-        /* Apply configuration */
+        // Apply configuration
         if (pObj->IO.WriteReg(pObj->DevAddr, LAN8742_BCR, readval) < 0) {
             status =  LAN8742_STATUS_WRITE_ERROR;
         }
     } else {
         status = LAN8742_STATUS_READ_ERROR;
-    }
+    } */
 
     return status;
 }
@@ -297,7 +292,7 @@ int32_t LAN8742_StartAutoNego(lan8742_Object_t *pObj)
   */
 int32_t LAN8742_GetLinkState(lan8742_Object_t *pObj)
 {
-    /* SKIP CODE
+    /* [SKIP CODE]
     uint32_t readval = 0;
 
     // Read Status register
@@ -371,7 +366,7 @@ int32_t LAN8742_SetLinkState(lan8742_Object_t *pObj, uint32_t LinkState)
     // uint32_t bcrvalue = 0;
     int32_t status = LAN8742_STATUS_OK;
 
-    /* SKIP CODE
+    /* [SKIP CODE]
     if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &bcrvalue) >= 0) {
         // Disable link config (Auto nego, speed and duplex)
         bcrvalue &= ~(LAN8742_BCR_AUTONEGO_EN | LAN8742_BCR_SPEED_SELECT | LAN8742_BCR_DUPLEX_MODE);
