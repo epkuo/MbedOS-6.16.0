@@ -154,21 +154,15 @@ MBED_WEAK void STM_HAL_ETH_Handler(ETH_HandleTypeDef *heth);
 #ifdef ETH_IP_VERSION_V2
 bool _phy_init()
 {
-    printf("enter _phy_init()\r\n");
-    
     /* Set PHY IO functions */
     LAN8742_RegisterBusIO(&LAN8742, &LAN8742_IOCtx);
-    
-    printf("Set PHY IO Complete\r\n");
 
     /* Initialize the LAN8742 ETH PHY */
-    // printf("_phy_init() = %d\r\n", LAN8742_Init(&LAN8742));
     return LAN8742_Init(&LAN8742) == LAN8742_STATUS_OK;
 }
 
 int32_t _phy_get_state()
 {
-    // printf("_phy_get_state() = %d\r\n", LAN8742_GetLinkState(&LAN8742));
     return LAN8742_GetLinkState(&LAN8742);
 }
 
@@ -178,22 +172,18 @@ bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *sp
         case LAN8742_STATUS_100MBITS_FULLDUPLEX:
             *duplex = ETH_FULLDUPLEX_MODE;
             *speed = ETH_SPEED_100M;
-            printf("ETH_FULLDUPLEX_MODE + ETH_SPEED_100M\r\n");
             break;
         case LAN8742_STATUS_100MBITS_HALFDUPLEX:
             *duplex = ETH_HALFDUPLEX_MODE;
             *speed = ETH_SPEED_100M;
-            printf("ETH_HALFDUPLEX_MODE + ETH_SPEED_100M\r\n");
             break;
         case LAN8742_STATUS_10MBITS_FULLDUPLEX:
             *duplex = ETH_FULLDUPLEX_MODE;
             *speed = ETH_SPEED_10M;
-            printf("ETH_FULLDUPLEX_MODE + ETH_SPEED_10M\r\n");
             break;
         case LAN8742_STATUS_10MBITS_HALFDUPLEX:
             *duplex = ETH_HALFDUPLEX_MODE;
             *speed = ETH_SPEED_10M;
-            printf("ETH_HALFDUPLEX_MODE + ETH_SPEED_10M\r\n");
             break;
         default:
             return false;
@@ -204,7 +194,6 @@ bool _phy_get_duplex_and_speed(int32_t phy_state, uint32_t *duplex, uint32_t *sp
 
 bool _phy_is_up(int32_t phy_state)
 {
-    // printf("_phy_is_up() = %d\r\n", phy_state > LAN8742_STATUS_LINK_DOWN);
     return phy_state > LAN8742_STATUS_LINK_DOWN;
 }
 
@@ -736,11 +725,9 @@ void STM32_EMAC::phy_task()
             if ((status & PHY_LINKED_STATUS) && !(phy_status & PHY_LINKED_STATUS)) {
                 tr_info("emac_link_state_cb set to true");
                 emac_link_state_cb(true);
-                printf("1\r\n");
             } else if (!(status & PHY_LINKED_STATUS) && (phy_status & PHY_LINKED_STATUS)) {
                 tr_info("emac_link_state_cb set to false");
                 emac_link_state_cb(false);
-                printf("2\r\n");
             }
         }
         phy_status = status;
@@ -761,36 +748,31 @@ void STM32_EMAC::phy_task()
         ETH_MACConfigTypeDef MACConf;
 
         if (!_phy_get_duplex_and_speed(status, &speed, &duplex)) {
-            // Default
+            /* Default */
             duplex = ETH_FULLDUPLEX_MODE;
             speed = ETH_SPEED_10M;
-            printf("3\r\n");
         }
 
         /* Get MAC Config MAC */
-        printf("4\r\n");
         HAL_ETH_GetMACConfig(&EthHandle, &MACConf);
         MACConf.DuplexMode = duplex;
         MACConf.Speed = speed;
         HAL_ETH_SetMACConfig(&EthHandle, &MACConf);
         HAL_ETH_Start_IT(&EthHandle);
     } else if (was_up && !is_up) {
-        // Stop ETH
+        /* Stop ETH */
         disable_interrupts();
         HAL_ETH_Stop(&EthHandle);
         enable_interrupts();
-        printf("5\r\n");
     }
 
     if (emac_link_state_cb) {
         if (is_up && !was_up) {
             emac_link_state_cb(true);
             tr_info("emac_link_state_cb set to true");
-            printf("6\r\n");
         } else if (!is_up && was_up) {
             emac_link_state_cb(false);
             tr_info("emac_link_state_cb set to false");
-            printf("7\r\n");
         }
     }
 
