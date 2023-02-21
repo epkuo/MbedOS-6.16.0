@@ -297,24 +297,25 @@ int32_t LAN8742_StartAutoNego(lan8742_Object_t *pObj)
   */
 int32_t LAN8742_GetLinkState(lan8742_Object_t *pObj)
 {
+    /* SKIP CODE
     uint32_t readval = 0;
 
-    /* Read Status register  */
+    // Read Status register
     if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BSR, &readval) < 0) {
         return LAN8742_STATUS_READ_ERROR;
     }
 
-    /* Read Status register again */
+    // Read Status register again
     if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BSR, &readval) < 0) {
         return LAN8742_STATUS_READ_ERROR;
     }
 
     if ((readval & LAN8742_BSR_LINK_STATUS) == 0) {
-        /* Return Link Down status */
+        // Return Link Down status
         return LAN8742_STATUS_LINK_DOWN;
     }
 
-    /* Check Auto negotiaition */
+    // Check Auto negotiaition
     if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &readval) < 0) {
         return LAN8742_STATUS_READ_ERROR;
     }
@@ -329,12 +330,12 @@ int32_t LAN8742_GetLinkState(lan8742_Object_t *pObj)
         } else {
             return LAN8742_STATUS_10MBITS_HALFDUPLEX;
         }
-    } else { /* Auto Nego enabled */
+    } else { // Auto Nego enabled
         if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_PHYSCSR, &readval) < 0) {
             return LAN8742_STATUS_READ_ERROR;
         }
 
-        /* Check if auto nego not done */
+        // Check if auto nego not done
         if ((readval & LAN8742_PHYSCSR_AUTONEGO_DONE) == 0) {
             return LAN8742_STATUS_AUTONEGO_NOTDONE;
         }
@@ -348,7 +349,8 @@ int32_t LAN8742_GetLinkState(lan8742_Object_t *pObj)
         } else {
             return LAN8742_STATUS_10MBITS_HALFDUPLEX;
         }
-    }
+    } */
+    return LAN8742_STATUS_100MBITS_FULLDUPLEX;
 }
 
 /**
