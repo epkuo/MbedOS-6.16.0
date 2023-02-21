@@ -174,9 +174,10 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
         tickstart =  pObj->IO.GetTick();
 
         /* Wait for 2s to perform initialization */
+        /* [SKIP CODE]
         while ((pObj->IO.GetTick() - tickstart) <= LAN8742_INIT_TO) {
             printf("Wait for 2s\r\n");
-        }
+        } */
         pObj->Is_Initialized = 1;
     }
 
