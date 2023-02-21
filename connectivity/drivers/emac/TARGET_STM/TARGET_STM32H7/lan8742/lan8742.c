@@ -141,12 +141,13 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
         /* if device address is matched */
         if (status == LAN8742_STATUS_OK) {
             /* set a software reset  */
+            /* [SKIP RESET CODE]
             if (pObj->IO.WriteReg(pObj->DevAddr, LAN8742_BCR, LAN8742_BCR_SOFT_RESET) >= 0) {
-                /* get software reset status */
+                // get software reset status
                 if (pObj->IO.ReadReg(pObj->DevAddr, LAN8742_BCR, &regvalue) >= 0) {
                     tickstart = pObj->IO.GetTick();
 
-                    /* wait until software reset is done or timeout occured  */
+                    // wait until software reset is done or timeout occured
                     while (regvalue & LAN8742_BCR_SOFT_RESET) {
                         if ((pObj->IO.GetTick() - tickstart) <= LAN8742_SW_RESET_TO) {
                             printf("LAN8742_SW_RESET_TO\r\n");
@@ -165,7 +166,7 @@ int32_t LAN8742_Init(lan8742_Object_t *pObj)
                 }
             } else {
                 status = LAN8742_STATUS_WRITE_ERROR;
-            }
+            } */
         }
     }
 
