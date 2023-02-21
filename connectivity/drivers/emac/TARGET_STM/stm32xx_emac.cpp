@@ -736,9 +736,11 @@ void STM32_EMAC::phy_task()
             if ((status & PHY_LINKED_STATUS) && !(phy_status & PHY_LINKED_STATUS)) {
                 tr_info("emac_link_state_cb set to true");
                 emac_link_state_cb(true);
+                printf("1\r\n");
             } else if (!(status & PHY_LINKED_STATUS) && (phy_status & PHY_LINKED_STATUS)) {
                 tr_info("emac_link_state_cb set to false");
                 emac_link_state_cb(false);
+                printf("2\r\n");
             }
         }
         phy_status = status;
@@ -762,9 +764,11 @@ void STM32_EMAC::phy_task()
             // Default
             duplex = ETH_FULLDUPLEX_MODE;
             speed = ETH_SPEED_10M;
+            printf("3\r\n");
         }
 
         /* Get MAC Config MAC */
+        printf("4\r\n");
         HAL_ETH_GetMACConfig(&EthHandle, &MACConf);
         MACConf.DuplexMode = duplex;
         MACConf.Speed = speed;
@@ -775,15 +779,18 @@ void STM32_EMAC::phy_task()
         disable_interrupts();
         HAL_ETH_Stop(&EthHandle);
         enable_interrupts();
+        printf("5\r\n");
     }
 
     if (emac_link_state_cb) {
         if (is_up && !was_up) {
             emac_link_state_cb(true);
             tr_info("emac_link_state_cb set to true");
+            printf("6\r\n");
         } else if (!is_up && was_up) {
             emac_link_state_cb(false);
             tr_info("emac_link_state_cb set to false");
+            printf("7\r\n");
         }
     }
 
