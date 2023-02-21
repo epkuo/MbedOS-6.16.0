@@ -17,7 +17,7 @@
         },
         "eth-phy-AutoNegotiation": {
             "help" : "Selects AutoNegotiation mode : ETH_AUTONEGOTIATION_ENABLE / ETH_AUTONEGOTIATION_DISABLE",
-            "value" : "ETH_AUTONEGOTIATION_DISABLE"
+            "value" : "ETH_AUTONEGOTIATION_ENABLE"
         },
         "eth-phy-DuplexMode": {
             "help" : "Selects DuplexMode mode : ETH_MODE_FULLDUPLEX / ETH_MODE_HALFDUPLEX",
